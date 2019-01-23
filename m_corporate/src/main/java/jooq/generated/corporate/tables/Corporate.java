@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Corporate extends TableImpl<CorporateRecord> {
 
-    private static final long serialVersionUID = -970589536;
+    private static final long serialVersionUID = -1873512346;
 
     /**
      * The reference instance of <code>corporate</code>
@@ -64,27 +64,7 @@ public class Corporate extends TableImpl<CorporateRecord> {
     /**
      * The column <code>corporate.name</code>.
      */
-    public final TableField<CorporateRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR(255).nullable(false), this, "");
-
-    /**
-     * The column <code>corporate.enabled</code>.
-     */
-    public final TableField<CorporateRecord, Byte> ENABLED = createField("enabled", org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "");
-
-    /**
-     * The column <code>corporate.status</code>.
-     */
-    public final TableField<CorporateRecord, Byte> STATUS = createField("status", org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "");
-
-    /**
-     * The column <code>corporate.type</code>.
-     */
-    public final TableField<CorporateRecord, Byte> TYPE = createField("type", org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "");
-
-    /**
-     * The column <code>corporate.createdBy</code>.
-     */
-    public final TableField<CorporateRecord, String> CREATEDBY = createField("createdBy", org.jooq.impl.SQLDataType.VARCHAR(30).nullable(false), this, "");
+    public final TableField<CorporateRecord, String> NAME = createField("name", org.jooq.impl.SQLDataType.VARCHAR(50).nullable(false), this, "");
 
     /**
      * The column <code>corporate.createdOn</code>.
@@ -92,9 +72,14 @@ public class Corporate extends TableImpl<CorporateRecord> {
     public final TableField<CorporateRecord, LocalDateTime> CREATEDON = createField("createdOn", org.jooq.impl.SQLDataType.LOCALDATETIME.nullable(false), this, "");
 
     /**
-     * The column <code>corporate.version</code>.
+     * The column <code>corporate.createdBy</code>.
      */
-    public final TableField<CorporateRecord, Integer> VERSION = createField("version", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+    public final TableField<CorporateRecord, String> CREATEDBY = createField("createdBy", org.jooq.impl.SQLDataType.VARCHAR(30).nullable(false), this, "");
+
+    /**
+     * The column <code>corporate.updatedOn</code>.
+     */
+    public final TableField<CorporateRecord, LocalDateTime> UPDATEDON = createField("updatedOn", org.jooq.impl.SQLDataType.LOCALDATETIME.nullable(false), this, "");
 
     /**
      * The column <code>corporate.updatedBy</code>.
@@ -102,9 +87,24 @@ public class Corporate extends TableImpl<CorporateRecord> {
     public final TableField<CorporateRecord, String> UPDATEDBY = createField("updatedBy", org.jooq.impl.SQLDataType.VARCHAR(30).nullable(false), this, "");
 
     /**
-     * The column <code>corporate.updatedOn</code>.
+     * The column <code>corporate.version</code>.
      */
-    public final TableField<CorporateRecord, LocalDateTime> UPDATEDON = createField("updatedOn", org.jooq.impl.SQLDataType.LOCALDATETIME.nullable(false), this, "");
+    public final TableField<CorporateRecord, Integer> VERSION = createField("version", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>corporate.status</code>.
+     */
+    public final TableField<CorporateRecord, Integer> STATUS = createField("status", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>corporate.type</code>.
+     */
+    public final TableField<CorporateRecord, Integer> TYPE = createField("type", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
+     * The column <code>corporate.enabled</code>.
+     */
+    public final TableField<CorporateRecord, Integer> ENABLED = createField("enabled", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>corporate</code> table reference
