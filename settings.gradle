@@ -1,3 +1,4 @@
 rootProject.name = 'platform'
 include 'p_corporate'
+include 'm_corporate'
 
