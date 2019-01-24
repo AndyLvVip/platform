@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: fileserver
+  profiles:
+    active: dev

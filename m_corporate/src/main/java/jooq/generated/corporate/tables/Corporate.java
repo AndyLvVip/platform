@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class Corporate extends TableImpl<CorporateRecord> {
 
-    private static final long serialVersionUID = -970589536;
+    private static final long serialVersionUID = -713085707;
 
     /**
      * The reference instance of <code>corporate</code>
@@ -69,17 +69,17 @@ public class Corporate extends TableImpl<CorporateRecord> {
     /**
      * The column <code>corporate.enabled</code>.
      */
-    public final TableField<CorporateRecord, Byte> ENABLED = createField("enabled", org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "");
+    public final TableField<CorporateRecord, Boolean> ENABLED = createField("enabled", org.jooq.impl.SQLDataType.BOOLEAN.nullable(false), this, "");
 
     /**
      * The column <code>corporate.status</code>.
      */
-    public final TableField<CorporateRecord, Byte> STATUS = createField("status", org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "");
+    public final TableField<CorporateRecord, Integer> STATUS = createField("status", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>corporate.type</code>.
      */
-    public final TableField<CorporateRecord, Byte> TYPE = createField("type", org.jooq.impl.SQLDataType.TINYINT.nullable(false), this, "");
+    public final TableField<CorporateRecord, Integer> TYPE = createField("type", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * The column <code>corporate.createdBy</code>.

@@ -25,8 +25,10 @@ repositories {
 }
 
 dependencies {
+    implementation "javax.persistence:javax.persistence-api:+"
     implementation "mysql:mysql-connector-java:${mysqlVersion}"
     implementation "org.jooq:jooq"
+    compileOnly 'org.projectlombok:lombok:+'
     jooqRuntime "mysql:mysql-connector-java:${mysqlVersion}"
 }
 
@@ -35,7 +37,7 @@ jooq {
     edition = 'OSS'
     corporate(sourceSets.main) {
         jdbc {
-            driver = 'com.mysql.jdbc.Driver'
+            driver = 'com.mysql.cj.jdbc.Driver'
             url = 'jdbc:mysql://192.168.63.195:3306/corporate'
             user = 'uca'
             password = 'password'
@@ -57,17 +59,18 @@ jooq {
                 inputSchema = 'corporate'
                 outputSchemaToDefault = true
                 recordVersionFields = true
+                includes = 'corporate'
                 forcedTypes {
                     forcedType {
                         name = 'Boolean'
-                        expression = 'corporate\\.enabled'
+                        expression = "corporate\\.corporate\\.enabled"
+//                        types = 'tinyint'
+                    }
+                    forcedType {
+                        name = 'Integer'
+//                        expression = '.*'
                         types = 'tinyint'
                     }
-                    /*forcedType {
-                        name = 'Integer'
-                        expression = '.*'
-                        types = 'tinyint'
-                    }*/
                 }
                 // ...
             }
@@ -77,6 +80,7 @@ jooq {
 //                deprecated = false
 //                records = true
 //                immutablePojos = true
+//                daos = true
 //                fluentSetters = true
                 // ...
             }
@@ -87,3 +91,7 @@ jooq {
         }
     }
 }
+
+
+// removes the task dependency from compileJava to generateSampleJooqSchemaSource
+project.tasks.getByName('compileJava').dependsOn -= 'generateCorporateJooqSchemaSource'
