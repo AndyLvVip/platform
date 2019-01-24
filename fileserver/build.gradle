@@ -84,7 +84,7 @@ jooq {
                 name = 'org.jooq.meta.mysql.MySQLDatabase'
                 inputSchema = 'file'
                 outputSchemaToDefault = true
-                recordVersionFields = true
+                recordVersionFields = 'version'
                 includes = 'file_set_info|file_item_info'
                 // ...
             }

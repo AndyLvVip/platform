@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FileItemInfo extends TableImpl<FileItemInfoRecord> {
 
-    private static final long serialVersionUID = 737242552;
+    private static final long serialVersionUID = -180592070;
 
     /**
      * The reference instance of <code>file_item_info</code>
@@ -107,6 +107,11 @@ public class FileItemInfo extends TableImpl<FileItemInfoRecord> {
     public final TableField<FileItemInfoRecord, LocalDateTime> UPDATED_ON = createField("updated_on", org.jooq.impl.SQLDataType.LOCALDATETIME.nullable(false), this, "");
 
     /**
+     * The column <code>file_item_info.version</code>.
+     */
+    public final TableField<FileItemInfoRecord, Integer> VERSION = createField("version", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
+
+    /**
      * Create a <code>file_item_info</code> table reference
      */
     public FileItemInfo() {
@@ -169,6 +174,14 @@ public class FileItemInfo extends TableImpl<FileItemInfoRecord> {
     @Override
     public List<UniqueKey<FileItemInfoRecord>> getKeys() {
         return Arrays.<UniqueKey<FileItemInfoRecord>>asList(Keys.KEY_FILE_ITEM_INFO_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TableField<FileItemInfoRecord, Integer> getRecordVersion() {
+        return VERSION;
     }
 
     /**

@@ -14,9 +14,6 @@ import java.util.UUID;
  * on: 2019/1/24 17:23
  */
 public abstract class StdRepository<R extends UpdatableRecord<R>, P extends StdDomain, T> extends DAOImpl<R, P, T> {
-    protected StdRepository(Table<R> table, Class<P> type) {
-        super(table, type);
-    }
 
     protected StdRepository(Table<R> table, Class<P> type, Configuration configuration) {
         super(table, type, configuration);
@@ -28,7 +25,7 @@ public abstract class StdRepository<R extends UpdatableRecord<R>, P extends StdD
         super.insert(object);
     }
 
-    public void create(P object, String createdBy) {
+    public void insert(P object, String createdBy) {
         object.setCreatedBy(createdBy);
         object.setUpdatedBy(createdBy);
         create(object);
@@ -36,9 +33,22 @@ public abstract class StdRepository<R extends UpdatableRecord<R>, P extends StdD
 
     private void create(P object) {
         object.setId(UUID.randomUUID().toString());
+        object.setVersion(1);
         LocalDateTime now = LocalDateTime.now();
         object.setCreatedOn(now);
         object.setUpdatedOn(now);
         super.insert(object);
+    }
+
+    @Override
+    @Deprecated
+    public void update(P object) {
+        super.update(object);
+    }
+
+    public void update(P object, String updatedBy) {
+        object.setUpdatedBy(updatedBy);
+        object.setUpdatedOn(LocalDateTime.now());
+        super.update(object);
     }
 }

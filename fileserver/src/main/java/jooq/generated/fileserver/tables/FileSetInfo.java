@@ -41,7 +41,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FileSetInfo extends TableImpl<FileSetInfoRecord> {
 
-    private static final long serialVersionUID = -1924593883;
+    private static final long serialVersionUID = -1884963182;
 
     /**
      * The reference instance of <code>file_set_info</code>
@@ -85,6 +85,11 @@ public class FileSetInfo extends TableImpl<FileSetInfoRecord> {
      * The column <code>file_set_info.updated_on</code>.
      */
     public final TableField<FileSetInfoRecord, LocalDateTime> UPDATED_ON = createField("updated_on", org.jooq.impl.SQLDataType.LOCALDATETIME.nullable(false), this, "");
+
+    /**
+     * The column <code>file_set_info.version</code>.
+     */
+    public final TableField<FileSetInfoRecord, Integer> VERSION = createField("version", org.jooq.impl.SQLDataType.INTEGER.nullable(false), this, "");
 
     /**
      * Create a <code>file_set_info</code> table reference
@@ -149,6 +154,14 @@ public class FileSetInfo extends TableImpl<FileSetInfoRecord> {
     @Override
     public List<UniqueKey<FileSetInfoRecord>> getKeys() {
         return Arrays.<UniqueKey<FileSetInfoRecord>>asList(Keys.KEY_FILE_SET_INFO_PRIMARY);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public TableField<FileSetInfoRecord, Integer> getRecordVersion() {
+        return VERSION;
     }
 
     /**

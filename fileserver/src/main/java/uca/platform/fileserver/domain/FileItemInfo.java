@@ -16,18 +16,18 @@ import javax.persistence.Table;
 @Data
 public class FileItemInfo extends StdDomain {
 
-    @Column
+    @Column(name = "file_set_info_id")
     private String fileSetInfoId;
 
-    @Column
+    @Column(name = "file_path")
     private String filePath;
 
-    @Column
+    @Column(name = "file_name")
     private String fileName;
 
-    @Column
+    @Column(name = "size")
     private Long size;
 
-    @Column
+    @Column(name = "sequence")
     private Integer sequence;
 }

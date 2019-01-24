@@ -22,11 +22,19 @@ public class FileSetInfoService {
     public FileSetInfo create(FileSetInfo fileSetInfo, String createdBy) {
         FileSetInfo result = new FileSetInfo();
         result.setFileSrcName(fileSetInfo.getFileSrcName());
-        fileSetInfoRepository.create(result, createdBy);
+        fileSetInfoRepository.insert(result, createdBy);
         return result;
     }
 
     public FileSetInfo fetch(String id) {
         return fileSetInfoRepository.findById(id);
+    }
+
+    @Transactional
+    public FileSetInfo edit(FileSetInfo fileSetInfo, String updatedBy) {
+        FileSetInfo result = fileSetInfoRepository.findById(fileSetInfo.getId());
+        result.setVersion(fileSetInfo.getVersion());
+        fileSetInfoRepository.update(result, updatedBy);
+        return result;
     }
 }

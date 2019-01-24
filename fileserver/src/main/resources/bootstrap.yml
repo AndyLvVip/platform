@@ -2,4 +2,4 @@ spring:
   application:
     name: fileserver
   profiles:
-    active: dev
+    active: default

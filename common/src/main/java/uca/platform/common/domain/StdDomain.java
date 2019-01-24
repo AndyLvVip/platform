@@ -14,22 +14,21 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Data
 public class StdDomain {
-    @Column
     @Id
     private String id;
 
-    @Column
+    @Column(name = "version")
     private Integer version;
 
-    @Column
+    @Column(name = "created_on")
     private LocalDateTime createdOn;
 
-    @Column
+    @Column(name = "created_by")
     private String createdBy;
 
-    @Column
+    @Column(name = "updated_on")
     private LocalDateTime updatedOn;
 
-    @Column
+    @Column(name = "updated_by")
     private String updatedBy;
 }

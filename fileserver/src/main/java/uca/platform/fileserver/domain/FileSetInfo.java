@@ -1,6 +1,7 @@
 package uca.platform.fileserver.domain;
 
 import lombok.Data;
+import lombok.ToString;
 import uca.platform.common.domain.StdDomain;
 
 import javax.persistence.Column;
@@ -14,9 +15,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "file_set_info")
 @Data
+@ToString(callSuper = true)
 public class FileSetInfo extends StdDomain {
 
-    @Column
+    @Column(name = "file_src_name")
     private String fileSrcName;
 
 }
