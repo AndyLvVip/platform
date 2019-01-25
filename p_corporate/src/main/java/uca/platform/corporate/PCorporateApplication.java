@@ -22,14 +22,14 @@ import org.springframework.web.client.RestTemplate;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class PCorporateApplication {
 
+    public static void main(String[] args) {
+        SpringApplication.run(PCorporateApplication.class, args);
+    }
+
     @Bean
     @LoadBalanced
     public RestTemplate restTemplate(OAuth2ProtectedResourceDetails details,
                                      OAuth2ClientContext oauth2ClientContext) {
         return new OAuth2RestTemplate(details, oauth2ClientContext);
-    }
-
-    public static void main(String[] args) {
-        SpringApplication.run(PCorporateApplication.class, args);
     }
 }

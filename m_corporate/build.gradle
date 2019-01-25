@@ -86,7 +86,7 @@ jooq {
             }
             target {
                 packageName = 'jooq.generated.corporate'
-                 directory = 'src/main/java'
+                directory = 'src/main/java'
             }
         }
     }
