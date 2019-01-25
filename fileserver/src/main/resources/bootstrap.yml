@@ -3,3 +3,8 @@ spring:
     name: fileserver
   profiles:
     active: dev
+uca:
+  file:
+    server:
+      url: http://localhost:7010
+    path: /opt/ztl/uploadFile
