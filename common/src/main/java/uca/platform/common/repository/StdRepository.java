@@ -32,7 +32,8 @@ public abstract class StdRepository<R extends UpdatableRecord<R>, P extends StdD
     }
 
     private void create(P object) {
-        object.setId(UUID.randomUUID().toString());
+        if(null == object.getId() || object.getId().isEmpty())
+            object.setId(UUID.randomUUID().toString());
         object.setVersion(1);
         LocalDateTime now = LocalDateTime.now();
         object.setCreatedOn(now);

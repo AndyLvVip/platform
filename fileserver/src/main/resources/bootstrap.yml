@@ -4,7 +4,7 @@ spring:
   profiles:
     active: dev
 uca:
-  file:
-    server:
-      url: http://localhost:7010
-    path: /opt/ztl/uploadFile
+  fileserver:
+    url: http://localhost:7010
+    real-file-path: /opt/uca/file
+    temp-file-path: /opt/uca/temp
