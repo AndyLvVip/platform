@@ -1,0 +1,11 @@
+= RESTful UCA File Server API Specification
+
+{project-version}
+
+:doctype: book
+
+== File Upload Api
+
+A `POST` request is used to upload a file
+
+operation::upload[snippets='http-request,request-parts,request-parameters,curl-request,http-response,response-fields']

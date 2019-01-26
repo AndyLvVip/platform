@@ -20,8 +20,8 @@ public class FileUploadController {
     }
 
     @PostMapping("/file/upload")
-    public FileItemInfo upload(MultipartFile file, String filePath) {
-        return this.fileItemInfoService.upload(file, filePath);
+    public FileItemInfo upload(MultipartFile file, String fileBaseCategory) {
+        return this.fileItemInfoService.upload(file, fileBaseCategory);
     }
 
 }

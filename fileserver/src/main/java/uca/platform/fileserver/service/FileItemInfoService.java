@@ -36,8 +36,8 @@ public class FileItemInfoService {
         this.stringRedisTemplate = stringRedisTemplate;
     }
 
-    public FileItemInfo upload(MultipartFile file, String filePath) {
-        FileItemInfo fileItemInfo = copy2TempPath(file, filePath);
+    public FileItemInfo upload(MultipartFile file, String fileBaseCategory) {
+        FileItemInfo fileItemInfo = copy2TempPath(file, fileBaseCategory);
         store2Redis(fileItemInfo);
         return fileItemInfo;
     }
@@ -47,17 +47,18 @@ public class FileItemInfoService {
         this.stringRedisTemplate.opsForValue().set(fileItemInfo.getId(), stdObjectMapper.toJson(fileItemInfo));
     }
 
-    private FileItemInfo copy2TempPath(MultipartFile file, String filePath) {
-        String originalFilename = file.getOriginalFilename();
+    private FileItemInfo copy2TempPath(MultipartFile file, String fileBaseCategory) {
+        String filename = file.getOriginalFilename();
         String fileExtension = "";
         int position;
-        if (-1 != (position = originalFilename.lastIndexOf("."))) {
-            fileExtension = originalFilename.substring(position);
+        if (-1 != (position = filename.lastIndexOf("."))) {
+            fileExtension = filename.substring(position);
         }
         FileItemInfo fileItemInfo = new FileItemInfo();
         fileItemInfo.setId(UUID.randomUUID().toString());
-        String relativeFilePath = Paths.get(filePath, StdDateUtils.now2yyyyMMdd(), filePath, fileItemInfo.getId(), fileExtension).toString();
-        fileItemInfo.setFilePath(relativeFilePath);
+        String relativeFilePath = Paths.get(fileBaseCategory, StdDateUtils.now2yyyyMMdd(), fileItemInfo.getId() + fileExtension).toString();
+        fileItemInfo.setFilePath(this.fileServerConfiguration.getUrl() + "/" + relativeFilePath.replace("\\", "/"));
+        fileItemInfo.setFileName(file.getOriginalFilename());
         Path tempFilePath = Paths.get(fileServerConfiguration.getTempFilePath(), relativeFilePath);
         try {
             File dest = new File(tempFilePath.toString());
