@@ -3,8 +3,3 @@ spring:
     name: fileserver
   profiles:
     active: dev
-uca:
-  fileserver:
-    url: http://localhost:7010
-    real-file-path: /opt/uca/file
-    temp-file-path: /opt/uca/temp
