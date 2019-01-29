@@ -13,7 +13,12 @@ import java.util.UUID;
  * Created by andy.lv
  * on: 2019/1/24 17:23
  */
-public abstract class StdRepository<R extends UpdatableRecord<R>, P extends StdDomain, T> extends DAOImpl<R, P, T> {
+public abstract class StdRepository<R extends UpdatableRecord<R>, P extends StdDomain> extends DAOImpl<R, P, String> {
+
+    @Override
+    protected String getId(P object) {
+        return object.getId();
+    }
 
     protected StdRepository(Table<R> table, Class<P> type, Configuration configuration) {
         super(table, type, configuration);

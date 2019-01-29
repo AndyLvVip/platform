@@ -14,18 +14,13 @@ import static jooq.generated.fileserver.Tables.FILE_SET_INFO;
  * on: 2019/1/24 16:20
  */
 @Repository
-public class FileSetInfoRepository extends StdRepository<FileSetInfoRecord, FileSetInfo, String> {
+public class FileSetInfoRepository extends StdRepository<FileSetInfoRecord, FileSetInfo> {
 
     private DSLContext dsl;
 
     public FileSetInfoRepository(Configuration configuration, DSLContext dsl) {
         super(FILE_SET_INFO, FileSetInfo.class, configuration);
         this.dsl = dsl;
-    }
-
-    @Override
-    protected String getId(FileSetInfo object) {
-        return object.getId();
     }
 
 }

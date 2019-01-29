@@ -1,5 +1,6 @@
 package uca.platform.fileserver.service;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -8,13 +9,14 @@ import uca.platform.StdDateUtils;
 import uca.platform.exception.InternalServerException;
 import uca.platform.fileserver.FileServerConfiguration;
 import uca.platform.fileserver.domain.FileItemInfo;
+import uca.platform.fileserver.repository.FileItemInfoRepository;
 import uca.platform.json.StdObjectMapper;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -27,10 +29,14 @@ public class FileItemInfoService {
     private final FileServerConfiguration fileServerConfiguration;
     private final StdObjectMapper stdObjectMapper;
     private final StringRedisTemplate stringRedisTemplate;
+    private final FileItemInfoRepository fileItemInfoRepository;
 
     public FileItemInfoService(FileServerConfiguration fileServerConfiguration,
                                StdObjectMapper stdObjectMapper,
-                               StringRedisTemplate stringRedisTemplate) {
+                               StringRedisTemplate stringRedisTemplate,
+                               FileItemInfoRepository fileItemInfoRepository
+    ) {
+        this.fileItemInfoRepository = fileItemInfoRepository;
         this.fileServerConfiguration = fileServerConfiguration;
         this.stdObjectMapper = stdObjectMapper;
         this.stringRedisTemplate = stringRedisTemplate;
@@ -71,5 +77,23 @@ public class FileItemInfoService {
         } catch (IOException e) {
             throw new InternalServerException(e);
         }
+    }
+
+    private void copy2RealPath(List<String> fileItemIds, String createdBy) {
+        if(CollectionUtils.isNotEmpty(fileItemIds)) {
+            fileItemIds.forEach(id -> {
+                FileItemInfo fileItemInfo = stdObjectMapper.fromJson(this.stringRedisTemplate.opsForValue().get(id), FileItemInfo.class);
+                this.fileItemInfoRepository.insert(fileItemInfo, createdBy);
+            });
+        }
+    }
+
+    private void clearAfterPersitence(List<String> fileItemIds) {
+        if(CollectionUtils.isNotEmpty(fileItemIds)) {
+            fileItemIds.forEach(id -> {
+                this.stringRedisTemplate.opsForValue().set(id, null);
+            });
+        }
+
     }
 }
