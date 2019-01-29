@@ -42,8 +42,9 @@ public class FileItemInfoService {
         this.stringRedisTemplate = stringRedisTemplate;
     }
 
-    public FileItemInfo upload(MultipartFile file, String fileBaseCategory) {
+    public FileItemInfo upload(MultipartFile file, String fileBaseCategory, String createdBy) {
         FileItemInfo fileItemInfo = copy2TempPath(file, fileBaseCategory);
+        fileItemInfoRepository.insert(fileItemInfo, createdBy);
         store2Redis(fileItemInfo);
         return fileItemInfo;
     }
@@ -94,6 +95,5 @@ public class FileItemInfoService {
                 this.stringRedisTemplate.opsForValue().set(id, null);
             });
         }
-
     }
 }

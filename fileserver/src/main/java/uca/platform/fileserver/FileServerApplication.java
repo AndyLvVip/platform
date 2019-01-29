@@ -8,6 +8,7 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import uca.platform.common.jooq.ObjectFactoryUtils;
 import uca.platform.factory.StdObjectFactory;
 import uca.platform.json.StdObjectMapper;
@@ -20,7 +21,7 @@ import uca.platform.json.StdObjectMapper;
 @RefreshScope
 @EnableEurekaClient
 @EnableCircuitBreaker
-//@EnableResourceServer
+@EnableResourceServer
 public class FileServerApplication {
 
     public static void main(String[] args) {
