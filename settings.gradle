@@ -4,4 +4,5 @@ include 'm_corporate'
 include 'fileserver'
 include 'common'
 include 'util'
+include 'msgpush'
 
