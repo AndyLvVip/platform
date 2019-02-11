@@ -4,28 +4,18 @@
 package jooq.generated.fileserver.tables;
 
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Generated;
-
 import jooq.generated.fileserver.DefaultSchema;
 import jooq.generated.fileserver.Indexes;
 import jooq.generated.fileserver.Keys;
 import jooq.generated.fileserver.tables.records.FileSetInfoRecord;
-
-import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Index;
-import org.jooq.Name;
-import org.jooq.Record;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
+
+import javax.annotation.Generated;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**
@@ -41,7 +31,7 @@ import org.jooq.impl.TableImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FileSetInfo extends TableImpl<FileSetInfoRecord> {
 
-    private static final long serialVersionUID = -1884963182;
+    private static final long serialVersionUID = -514928537;
 
     /**
      * The reference instance of <code>file_set_info</code>
@@ -62,9 +52,9 @@ public class FileSetInfo extends TableImpl<FileSetInfoRecord> {
     public final TableField<FileSetInfoRecord, String> ID = createField("id", org.jooq.impl.SQLDataType.CHAR(36).nullable(false), this, "");
 
     /**
-     * The column <code>file_set_info.file_src_name</code>.
+     * The column <code>file_set_info.file_src_remark</code>.
      */
-    public final TableField<FileSetInfoRecord, String> FILE_SRC_NAME = createField("file_src_name", org.jooq.impl.SQLDataType.VARCHAR(20).nullable(false), this, "");
+    public final TableField<FileSetInfoRecord, String> FILE_SRC_REMARK = createField("file_src_remark", org.jooq.impl.SQLDataType.VARCHAR(20).nullable(false), this, "");
 
     /**
      * The column <code>file_set_info.created_by</code>.

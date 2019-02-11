@@ -8,4 +8,37 @@
 
 A `POST` request is used to upload a file
 
-operation::upload[snippets='http-request,request-parts,request-parameters,curl-request,http-response,response-fields']
+operation::file-upload[snippets='http-request,request-parts,request-headers,curl-request,http-response,response-fields']
+
+== File Item File Upload Api
+
+operation::file-item-upload[snippets='http-request,request-parts,request-headers,request-parameters,curl-request,http-response,response-fields']
+
+== Fetch File Items Api
+
+operation::fetch-items[snippets='http-request,request-headers,request-parameters,curl-request,http-response,response-fields']
+
+== Fetch First File in Each Group Api
+
+operation::fetch-first-file-in-each-group[snippets='http-request,request-headers,request-parameters,curl-request,http-response,response-fields']
+
+== Delete File Api
+
+operation::file-delete[snippets='http-request,request-headers,path-parameters,curl-request,http-response']
+
+== Init QrCode
+
+operation::init-qr-code[snippets='http-request,request-headers,curl-request,http-response,response-fields']
+
+== File Item Upload by Qr Code Api
+
+operation::upload-by-qr-code[snippets='http-request,request-parts,request-headers,path-parameters,curl-request,http-response,response-fields']
+
+
+== File Item Image Upload Api
+
+operation::file-item-img-upload[snippets='request-parts,request-headers,request-parameters,curl-request,http-response,response-fields']
+
+== File Item Image Upload by Qr Code Api
+
+operation::upload-img-by-qr-code[snippets='request-parts,request-headers,path-parameters,curl-request,http-response,response-fields']

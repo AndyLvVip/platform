@@ -4,28 +4,18 @@
 package jooq.generated.corporate.tables;
 
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Generated;
-
 import jooq.generated.corporate.DefaultSchema;
 import jooq.generated.corporate.Indexes;
 import jooq.generated.corporate.Keys;
 import jooq.generated.corporate.tables.records.CorporateRecord;
-
-import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Index;
-import org.jooq.Name;
-import org.jooq.Record;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
+
+import javax.annotation.Generated;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**

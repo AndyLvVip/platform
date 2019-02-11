@@ -4,9 +4,9 @@
 package jooq.generated.corporate;
 
 
-import javax.annotation.Generated;
-
 import jooq.generated.corporate.tables.Corporate;
+
+import javax.annotation.Generated;
 
 
 /**

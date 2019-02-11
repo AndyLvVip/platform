@@ -55,7 +55,7 @@ dependencies {
     testCompile 'org.springframework.restdocs:spring-restdocs-mockmvc:2.0.3.RELEASE'
     runtimeOnly 'mysql:mysql-connector-java'
     compileOnly 'org.projectlombok:lombok'
-    implementation "javax.persistence:javax.persistence-api:+"
+    implementation "javax.persistence:javax.persistence-api:2.2"
     jooqRuntime "mysql:mysql-connector-java:${mysqlVersion}"
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 

@@ -4,13 +4,12 @@
 package jooq.generated.corporate;
 
 
-import javax.annotation.Generated;
-
 import jooq.generated.corporate.tables.Corporate;
-
 import org.jooq.Index;
 import org.jooq.OrderField;
 import org.jooq.impl.Internal;
+
+import javax.annotation.Generated;
 
 
 /**

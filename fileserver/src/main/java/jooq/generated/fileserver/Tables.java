@@ -4,10 +4,10 @@
 package jooq.generated.fileserver;
 
 
-import javax.annotation.Generated;
-
 import jooq.generated.fileserver.tables.FileItemInfo;
 import jooq.generated.fileserver.tables.FileSetInfo;
+
+import javax.annotation.Generated;
 
 
 /**

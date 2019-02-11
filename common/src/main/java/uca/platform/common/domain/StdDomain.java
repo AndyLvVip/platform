@@ -3,7 +3,6 @@ package uca.platform.common.domain;
 import lombok.Data;
 
 import javax.persistence.Column;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
@@ -14,9 +13,6 @@ import java.time.LocalDateTime;
 @MappedSuperclass
 @Data
 public class StdDomain {
-    @Id
-    private String id;
-
     @Column(name = "version")
     private Integer version;
 

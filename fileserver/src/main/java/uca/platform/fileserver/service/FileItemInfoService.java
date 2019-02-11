@@ -1,23 +1,12 @@
 package uca.platform.fileserver.service;
 
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 import org.springframework.web.multipart.MultipartFile;
-import uca.platform.StdDateUtils;
-import uca.platform.exception.InternalServerException;
+import uca.platform.StdStringUtils;
 import uca.platform.fileserver.FileServerConfiguration;
+import uca.platform.fileserver.StoreLocationFlag;
 import uca.platform.fileserver.domain.FileItemInfo;
 import uca.platform.fileserver.repository.FileItemInfoRepository;
-import uca.platform.json.StdObjectMapper;
-
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by andy.lv
@@ -27,73 +16,49 @@ import java.util.UUID;
 public class FileItemInfoService {
 
     private final FileServerConfiguration fileServerConfiguration;
-    private final StdObjectMapper stdObjectMapper;
-    private final StringRedisTemplate stringRedisTemplate;
     private final FileItemInfoRepository fileItemInfoRepository;
+    private final FileSetInfoService fileSetInfoService;
+    private final FileUploadService fileUploadService;
 
-    public FileItemInfoService(FileServerConfiguration fileServerConfiguration,
-                               StdObjectMapper stdObjectMapper,
-                               StringRedisTemplate stringRedisTemplate,
-                               FileItemInfoRepository fileItemInfoRepository
+    public FileItemInfoService(FileServerConfiguration fileServerConfiguration
+            , FileItemInfoRepository fileItemInfoRepository
+            , FileSetInfoService fileSetInfoService
+            , FileUploadService fileUploadService
     ) {
+        this.fileUploadService = fileUploadService;
         this.fileItemInfoRepository = fileItemInfoRepository;
         this.fileServerConfiguration = fileServerConfiguration;
-        this.stdObjectMapper = stdObjectMapper;
-        this.stringRedisTemplate = stringRedisTemplate;
+        this.fileSetInfoService = fileSetInfoService;
     }
 
-    public FileItemInfo upload(MultipartFile file, String fileBaseCategory, String createdBy) {
-        FileItemInfo fileItemInfo = copy2TempPath(file, fileBaseCategory);
-        fileItemInfoRepository.insert(fileItemInfo, createdBy);
-        store2Redis(fileItemInfo);
+    private FileItemInfo store(MultipartFile file, StoreLocationFlag flag) {
+        String relativeFilePath = fileUploadService.store(file, flag);
+        FileItemInfo fileItemInfo = new FileItemInfo();
+        fileItemInfo.setId(StdStringUtils.uuid());
+        fileItemInfo.setFilePath(this.fileUploadService.buildFilePath(relativeFilePath));
+        fileItemInfo.setFileName(file.getOriginalFilename());
+        fileItemInfo.setSize(file.getSize());
         return fileItemInfo;
     }
 
-
-    private void store2Redis(FileItemInfo fileItemInfo) {
-        this.stringRedisTemplate.opsForValue().set(fileItemInfo.getId(), stdObjectMapper.toJson(fileItemInfo));
+    public FileItemInfo upload(
+            StoreLocationFlag flag
+            , String fileSetInfoId
+            , MultipartFile file
+            , String fileSrcRemark
+            , String createdBy
+    ) {
+        fileSetInfoService.initFileSetInfoIfNotExists(fileSetInfoId, fileSrcRemark, createdBy);
+        FileItemInfo fileItemInfo = store(file, flag);
+        fileItemInfo.setFileSetInfoId(fileSetInfoId);
+        fileItemInfoRepository.insert(fileItemInfo, createdBy);
+        return fileItemInfo;
     }
 
-    private FileItemInfo copy2TempPath(MultipartFile file, String fileBaseCategory) {
-        String filename = file.getOriginalFilename();
-        String fileExtension = "";
-        int position;
-        if (-1 != (position = filename.lastIndexOf("."))) {
-            fileExtension = filename.substring(position);
-        }
-        FileItemInfo fileItemInfo = new FileItemInfo();
-        fileItemInfo.setId(UUID.randomUUID().toString());
-        String relativeFilePath = Paths.get(fileBaseCategory, StdDateUtils.now2yyyyMMdd(), fileItemInfo.getId() + fileExtension).toString();
-        fileItemInfo.setFilePath(this.fileServerConfiguration.getUrl() + "/" + relativeFilePath.replace("\\", "/"));
-        fileItemInfo.setFileName(file.getOriginalFilename());
-        Path tempFilePath = Paths.get(fileServerConfiguration.getTempFilePath(), relativeFilePath);
-        try {
-            File dest = new File(tempFilePath.toString());
-            if(!dest.getParentFile().exists())
-                Assert.isTrue(dest.getParentFile().mkdirs(), "can not mkdirs for: " + dest.getParentFile().getAbsolutePath());
-            Assert.isTrue(dest.createNewFile(), "can not mkdirs for: " + dest.getAbsolutePath());
-            file.transferTo(dest);
-            fileItemInfo.setSize(file.getSize());
-            return fileItemInfo;
-        } catch (IOException e) {
-            throw new InternalServerException(e);
-        }
+    public void delete(FileItemInfo fileItemInfo) {
+        FileItemInfo result = fileItemInfoRepository.forceFindById(fileItemInfo.getId());
+        result.setVersion(fileItemInfo.getVersion());
+        fileItemInfoRepository.delete(result);
     }
 
-    private void copy2RealPath(List<String> fileItemIds, String createdBy) {
-        if(CollectionUtils.isNotEmpty(fileItemIds)) {
-            fileItemIds.forEach(id -> {
-                FileItemInfo fileItemInfo = stdObjectMapper.fromJson(this.stringRedisTemplate.opsForValue().get(id), FileItemInfo.class);
-                this.fileItemInfoRepository.insert(fileItemInfo, createdBy);
-            });
-        }
-    }
-
-    private void clearAfterPersitence(List<String> fileItemIds) {
-        if(CollectionUtils.isNotEmpty(fileItemIds)) {
-            fileItemIds.forEach(id -> {
-                this.stringRedisTemplate.opsForValue().set(id, null);
-            });
-        }
-    }
 }

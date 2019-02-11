@@ -4,6 +4,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import uca.platform.fileserver.domain.FileSetInfo;
 import uca.platform.fileserver.repository.FileSetInfoRepository;
+import uca.platform.json.StdObjectMapper;
+import uca.platform.redis.StdStringRedisTemplate;
 
 /**
  * Created by andy.lv
@@ -12,29 +14,52 @@ import uca.platform.fileserver.repository.FileSetInfoRepository;
 @Service
 public class FileSetInfoService {
 
-    FileSetInfoRepository fileSetInfoRepository;
+    private final FileSetInfoRepository fileSetInfoRepository;
 
-    public FileSetInfoService(FileSetInfoRepository fileSetInfoRepository) {
+    private final StdStringRedisTemplate stdStringRedisTemplate;
+
+    private final StdObjectMapper stdObjectMapper;
+
+    public FileSetInfoService(FileSetInfoRepository fileSetInfoRepository
+                              , StdStringRedisTemplate stdStringRedisTemplate
+                              , StdObjectMapper stdObjectMapper
+    ) {
         this.fileSetInfoRepository = fileSetInfoRepository;
+        this.stdStringRedisTemplate = stdStringRedisTemplate;
+        this.stdObjectMapper = stdObjectMapper;
     }
 
     @Transactional
     public FileSetInfo create(FileSetInfo fileSetInfo, String createdBy) {
         FileSetInfo result = new FileSetInfo();
-        result.setFileSrcName(fileSetInfo.getFileSrcName());
-        fileSetInfoRepository.insert(result, createdBy);
+        result.setFileSrcRemark(fileSetInfo.getFileSrcRemark());
+        this.fileSetInfoRepository.insert(result, createdBy);
         return result;
     }
 
     public FileSetInfo fetch(String id) {
-        return fileSetInfoRepository.findById(id);
+        return this.fileSetInfoRepository.findById(id);
     }
 
     @Transactional
     public FileSetInfo edit(FileSetInfo fileSetInfo, String updatedBy) {
-        FileSetInfo result = fileSetInfoRepository.findById(fileSetInfo.getId());
+        FileSetInfo result = this.fileSetInfoRepository.findById(fileSetInfo.getId());
         result.setVersion(fileSetInfo.getVersion());
-        fileSetInfoRepository.update(result, updatedBy);
+        this.fileSetInfoRepository.update(result, updatedBy);
         return result;
     }
+
+    public void initFileSetInfoIfNotExists(String fileSetInfoId, String fileSrcRemark, String createdBy) {
+        stdStringRedisTemplate.getWithLock(fileSetInfoId, 60 * 60, () -> {
+            FileSetInfo fileSetInfo = fileSetInfoRepository.findById(fileSetInfoId);
+            if (null == fileSetInfo) {
+                fileSetInfo = new FileSetInfo();
+                fileSetInfo.setId(fileSetInfoId);
+                fileSetInfo.setFileSrcRemark(fileSrcRemark);
+                this.fileSetInfoRepository.insert(fileSetInfo, createdBy);
+            }
+            return stdObjectMapper.toJson(fileSetInfo);
+        });
+    }
+
 }

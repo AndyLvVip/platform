@@ -15,8 +15,8 @@ public class FileServerConfiguration {
 
     private String url;
 
-    private String tempFilePath;
-
     private String realFilePath;
+
+    private String exposedLocation;
 
 }

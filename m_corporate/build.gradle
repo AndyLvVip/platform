@@ -25,11 +25,12 @@ repositories {
 }
 
 dependencies {
-    implementation "javax.persistence:javax.persistence-api:+"
+    implementation "javax.persistence:javax.persistence-api:2.2"
     implementation "mysql:mysql-connector-java:${mysqlVersion}"
     implementation "org.jooq:jooq"
-    compileOnly 'org.projectlombok:lombok:+'
+    compileOnly 'org.projectlombok:lombok:1.18.4'
     jooqRuntime "mysql:mysql-connector-java:${mysqlVersion}"
+    testImplementation 'junit:junit:4.12'
 }
 
 jooq {

@@ -4,28 +4,18 @@
 package jooq.generated.fileserver.tables;
 
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.Generated;
-
 import jooq.generated.fileserver.DefaultSchema;
 import jooq.generated.fileserver.Indexes;
 import jooq.generated.fileserver.Keys;
 import jooq.generated.fileserver.tables.records.FileItemInfoRecord;
-
-import org.jooq.Field;
-import org.jooq.ForeignKey;
-import org.jooq.Index;
-import org.jooq.Name;
-import org.jooq.Record;
-import org.jooq.Schema;
-import org.jooq.Table;
-import org.jooq.TableField;
-import org.jooq.UniqueKey;
+import org.jooq.*;
 import org.jooq.impl.DSL;
 import org.jooq.impl.TableImpl;
+
+import javax.annotation.Generated;
+import java.time.LocalDateTime;
+import java.util.Arrays;
+import java.util.List;
 
 
 /**

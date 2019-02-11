@@ -4,7 +4,7 @@ package uca.platform.exception;
  * Created by andy.lv
  * on: 2019/1/25 16:52
  */
-public class InternalServerException extends StdException {
+public class InternalServerException extends StdRuntimeException {
     public InternalServerException(String message) {
         super(message);
     }

@@ -1,7 +1,7 @@
 drop table if exists file_set_info;
 create table file_set_info (
 id char(36) not null primary key,
-file_src_name varchar(20) not null,
+file_src_remark varchar(20) not null,
 created_by varchar(30) not null,
 created_on datetime(3) not null,
 updated_by varchar(30) not null,

@@ -4,13 +4,12 @@
 package jooq.generated.corporate;
 
 
-import javax.annotation.Generated;
-
 import jooq.generated.corporate.tables.Corporate;
 import jooq.generated.corporate.tables.records.CorporateRecord;
-
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
+
+import javax.annotation.Generated;
 
 
 /**

@@ -4,14 +4,13 @@
 package jooq.generated.fileserver;
 
 
-import javax.annotation.Generated;
-
 import jooq.generated.fileserver.tables.FileItemInfo;
 import jooq.generated.fileserver.tables.FileSetInfo;
-
 import org.jooq.Index;
 import org.jooq.OrderField;
 import org.jooq.impl.Internal;
+
+import javax.annotation.Generated;
 
 
 /**

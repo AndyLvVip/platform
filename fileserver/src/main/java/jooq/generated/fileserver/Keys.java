@@ -4,15 +4,14 @@
 package jooq.generated.fileserver;
 
 
-import javax.annotation.Generated;
-
 import jooq.generated.fileserver.tables.FileItemInfo;
 import jooq.generated.fileserver.tables.FileSetInfo;
 import jooq.generated.fileserver.tables.records.FileItemInfoRecord;
 import jooq.generated.fileserver.tables.records.FileSetInfoRecord;
-
 import org.jooq.UniqueKey;
 import org.jooq.impl.Internal;
+
+import javax.annotation.Generated;
 
 
 /**

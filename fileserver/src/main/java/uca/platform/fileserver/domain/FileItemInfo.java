@@ -1,7 +1,7 @@
 package uca.platform.fileserver.domain;
 
 import lombok.Data;
-import uca.platform.common.domain.StdDomain;
+import uca.platform.common.domain.StdStrDomain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "file_item_info")
 @Data
-public class FileItemInfo extends StdDomain {
+public class FileItemInfo extends StdStrDomain {
 
     @Column(name = "file_set_info_id")
     private String fileSetInfoId;
@@ -30,4 +30,5 @@ public class FileItemInfo extends StdDomain {
 
     @Column(name = "sequence")
     private Integer sequence;
+
 }

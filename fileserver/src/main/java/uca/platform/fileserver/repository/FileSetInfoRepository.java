@@ -4,7 +4,7 @@ import jooq.generated.fileserver.tables.records.FileSetInfoRecord;
 import org.jooq.Configuration;
 import org.jooq.DSLContext;
 import org.springframework.stereotype.Repository;
-import uca.platform.common.repository.StdRepository;
+import uca.platform.common.repository.StdStrRepository;
 import uca.platform.fileserver.domain.FileSetInfo;
 
 import static jooq.generated.fileserver.Tables.FILE_SET_INFO;
@@ -14,7 +14,7 @@ import static jooq.generated.fileserver.Tables.FILE_SET_INFO;
  * on: 2019/1/24 16:20
  */
 @Repository
-public class FileSetInfoRepository extends StdRepository<FileSetInfoRecord, FileSetInfo> {
+public class FileSetInfoRepository extends StdStrRepository<FileSetInfoRecord, FileSetInfo> {
 
     private DSLContext dsl;
 

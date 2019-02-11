@@ -4,17 +4,15 @@
 package jooq.generated.fileserver.tables.records;
 
 
-import java.time.LocalDateTime;
-
-import javax.annotation.Generated;
-
 import jooq.generated.fileserver.tables.FileSetInfo;
-
 import org.jooq.Field;
 import org.jooq.Record1;
 import org.jooq.Record7;
 import org.jooq.Row7;
 import org.jooq.impl.UpdatableRecordImpl;
+
+import javax.annotation.Generated;
+import java.time.LocalDateTime;
 
 
 /**
@@ -30,7 +28,7 @@ import org.jooq.impl.UpdatableRecordImpl;
 @SuppressWarnings({ "all", "unchecked", "rawtypes" })
 public class FileSetInfoRecord extends UpdatableRecordImpl<FileSetInfoRecord> implements Record7<String, String, String, LocalDateTime, String, LocalDateTime, Integer> {
 
-    private static final long serialVersionUID = -188229998;
+    private static final long serialVersionUID = 1727291432;
 
     /**
      * Setter for <code>file_set_info.id</code>.
@@ -47,16 +45,16 @@ public class FileSetInfoRecord extends UpdatableRecordImpl<FileSetInfoRecord> im
     }
 
     /**
-     * Setter for <code>file_set_info.file_src_name</code>.
+     * Setter for <code>file_set_info.file_src_remark</code>.
      */
-    public void setFileSrcName(String value) {
+    public void setFileSrcRemark(String value) {
         set(1, value);
     }
 
     /**
-     * Getter for <code>file_set_info.file_src_name</code>.
+     * Getter for <code>file_set_info.file_src_remark</code>.
      */
-    public String getFileSrcName() {
+    public String getFileSrcRemark() {
         return (String) get(1);
     }
 
@@ -175,7 +173,7 @@ public class FileSetInfoRecord extends UpdatableRecordImpl<FileSetInfoRecord> im
      */
     @Override
     public Field<String> field2() {
-        return FileSetInfo.FILE_SET_INFO.FILE_SRC_NAME;
+        return FileSetInfo.FILE_SET_INFO.FILE_SRC_REMARK;
     }
 
     /**
@@ -231,7 +229,7 @@ public class FileSetInfoRecord extends UpdatableRecordImpl<FileSetInfoRecord> im
      */
     @Override
     public String component2() {
-        return getFileSrcName();
+        return getFileSrcRemark();
     }
 
     /**
@@ -287,7 +285,7 @@ public class FileSetInfoRecord extends UpdatableRecordImpl<FileSetInfoRecord> im
      */
     @Override
     public String value2() {
-        return getFileSrcName();
+        return getFileSrcRemark();
     }
 
     /**
@@ -344,7 +342,7 @@ public class FileSetInfoRecord extends UpdatableRecordImpl<FileSetInfoRecord> im
      */
     @Override
     public FileSetInfoRecord value2(String value) {
-        setFileSrcName(value);
+        setFileSrcRemark(value);
         return this;
     }
 
@@ -422,11 +420,11 @@ public class FileSetInfoRecord extends UpdatableRecordImpl<FileSetInfoRecord> im
     /**
      * Create a detached, initialised FileSetInfoRecord
      */
-    public FileSetInfoRecord(String id, String fileSrcName, String createdBy, LocalDateTime createdOn, String updatedBy, LocalDateTime updatedOn, Integer version) {
+    public FileSetInfoRecord(String id, String fileSrcRemark, String createdBy, LocalDateTime createdOn, String updatedBy, LocalDateTime updatedOn, Integer version) {
         super(FileSetInfo.FILE_SET_INFO);
 
         set(0, id);
-        set(1, fileSrcName);
+        set(1, fileSrcRemark);
         set(2, createdBy);
         set(3, createdOn);
         set(4, updatedBy);
