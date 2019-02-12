@@ -1,5 +1,6 @@
 package uca.platform.fileserver.controller;
 
+import com.sun.imageio.plugins.common.ImageUtil;
 import org.apache.http.entity.ContentType;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +24,8 @@ import uca.platform.fileserver.domain.FileItemInfo;
 import uca.platform.fileserver.service.FileUploadService;
 import uca.platform.json.StdObjectMapper;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.file.Path;
@@ -166,10 +169,11 @@ public class FileItemControllerTest {
 
     @Test
     public void fileItemImgUpload() throws Exception {
-        File file = resourceLoader.getResource("classpath:srcfile.png").getFile();
+        BufferedImage bi = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        File file = new File("temp.jpg");
+        ImageIO.write(bi, "jpg", file);
         assertTrue(file.exists());
-
-        MockMultipartFile mfile = new MockMultipartFile("file", "srcfile.png", ContentType.DEFAULT_BINARY.getMimeType(), new FileInputStream(file));
+        MockMultipartFile mfile = new MockMultipartFile("file", file.getName(), ContentType.DEFAULT_BINARY.getMimeType(), new FileInputStream(file));
 
         String jsonFileItemInfo = this.mockMvc.perform(
                 fileUpload("/fileItem/img").file(mfile)
@@ -227,5 +231,6 @@ public class FileItemControllerTest {
         assertTrue(srcfile.delete());
         assertTrue(file100.delete());
         assertTrue(file800.delete());
+        assertTrue(file.delete());
     }
 }

@@ -37,8 +37,8 @@ operation::upload-by-qr-code[snippets='http-request,request-parts,request-header
 
 == File Item Image Upload Api
 
-operation::file-item-img-upload[snippets='request-parts,request-headers,request-parameters,curl-request,http-response,response-fields']
+operation::file-item-img-upload[snippets='http-request,request-parts,request-headers,request-parameters,curl-request,http-response,response-fields']
 
 == File Item Image Upload by Qr Code Api
 
-operation::upload-img-by-qr-code[snippets='request-parts,request-headers,path-parameters,curl-request,http-response,response-fields']
+operation::upload-img-by-qr-code[snippets='http-request,request-parts,request-headers,path-parameters,curl-request,http-response,response-fields']

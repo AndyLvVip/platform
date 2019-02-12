@@ -25,6 +25,8 @@ import uca.platform.fileserver.service.FileUploadService;
 import uca.platform.fileserver.vo.QrCodeUploadVo;
 import uca.platform.json.StdObjectMapper;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
 import java.nio.file.Path;
@@ -176,7 +178,9 @@ public class FileItemQrCodeControllerTest {
                 ;
 
         Map<String, String> qrCodeMap = stdObjectMapper.fromJson(jsonQrCode, HashMap.class);
-        File file = resourceLoader.getResource("classpath:srcfile.png").getFile();
+        BufferedImage bi = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB);
+        File file = new File("temp.jpg");
+        ImageIO.write(bi, "jpg", file);
         assertTrue(file.exists());
 
         MockMultipartFile mfile = new MockMultipartFile("file", file.getName(), ContentType.DEFAULT_BINARY.getMimeType(), new FileInputStream(file));
@@ -233,6 +237,7 @@ public class FileItemQrCodeControllerTest {
         assertTrue(srcfile.delete());
         assertTrue(file100.delete());
         assertTrue(file800.delete());
+        assertTrue(file.delete());
 
     }
 }
