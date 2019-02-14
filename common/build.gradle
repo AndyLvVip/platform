@@ -10,6 +10,7 @@ repositories {
 
 dependencies {
     implementation project(':util')
+    implementation 'org.redisson:redisson-spring-boot-starter:3.10.1'
     implementation "javax.persistence:javax.persistence-api:2.2"
     compileOnly 'org.projectlombok:lombok:1.18.4'
     implementation "org.jooq:jooq:3.11.9"

@@ -87,8 +87,8 @@ jooq {
     fileServer(sourceSets.main) {
         jdbc {
             driver = 'com.mysql.cj.jdbc.Driver'
-            url = 'jdbc:mysql://127.0.0.1:3306/file'
-            user = 'andy'
+            url = 'jdbc:mysql://192.168.63.195:3306/file'
+            user = 'uca'
             password = 'password'
             properties {
                 property {

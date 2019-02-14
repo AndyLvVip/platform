@@ -70,7 +70,7 @@ public class FileSetControllerTest {
         fileItemInfo1.setSequence(1);
         fileItemInfo1.setSize(1024L);
         fileItemInfo1.setFileName("example.doc");
-        fileItemInfo1.setFilePath("http://localhost:7010/f02/20190209/e34e95af-1842-4ed9-b719-f257ddc85fac.doc");
+        fileItemInfo1.setFilePath("http://localhost:7010/media/f02/20190209/e34e95af-1842-4ed9-b719-f257ddc85fac.doc");
         fileItemInfo1.setFileSetInfoId(StdStringUtils.uuid());
         fileItemInfo1.setVersion(1);
         fileItemInfo1.setCreatedBy("Unit Test");
@@ -85,7 +85,7 @@ public class FileSetControllerTest {
         fileItemInfo2.setSequence(1);
         fileItemInfo2.setSize(1024L);
         fileItemInfo2.setFileName("example.doc");
-        fileItemInfo2.setFilePath("http://localhost:7010/f02/20190209/e34e95af-1842-4ed9-b719-f257ddc85fac.doc");
+        fileItemInfo2.setFilePath("http://localhost:7010/media/f02/20190209/e34e95af-1842-4ed9-b719-f257ddc85fac.doc");
         fileItemInfo2.setFileSetInfoId(StdStringUtils.uuid());
         fileItemInfo2.setVersion(1);
         fileItemInfo2.setCreatedBy("Unit Test");

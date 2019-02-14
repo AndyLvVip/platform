@@ -1,6 +1,5 @@
 package uca.platform.fileserver.controller;
 
-import com.sun.imageio.plugins.common.ImageUtil;
 import org.apache.http.entity.ContentType;
 import org.junit.Before;
 import org.junit.Test;

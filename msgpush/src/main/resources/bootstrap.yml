@@ -2,4 +2,4 @@ spring:
   application:
     name: msgpush
   profiles:
-    active: default
+    active: dev
